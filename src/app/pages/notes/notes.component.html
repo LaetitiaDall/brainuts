@@ -1,11 +1,13 @@
-<h2>Les chiens des retraités</h2>
+<h3>Les chiens des retraités</h3>
 
 <form>
   <div class="form-group">
     <textarea class="form-control" id="textarea" name="textarea" rows="3" [(ngModel)]="content"></textarea>
   </div>
-  <button type="button" class="btn btn-primary pull-right" (click)="saveNote()"><i class="fa fa-paper-plane"
-                                                                                   aria-hidden="true"></i>
+
+
+  <button type="button" class="btn btn-primary pull-right" (click)="saveNote()">
+    <i class="fa fa-paper-plane" aria-hidden="true"></i>
   </button>
 
   <button type="button" class="btn btn-secondary pull-right" (click)="refresh()">
@@ -17,6 +19,15 @@
 
 <div class="clearfix"></div>
 <hr>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">#</span>
+  </div>
+  <input type="text" class="form-control" placeholder="tag">
+</div>
+
+
 
 <div *ngFor="let note of notes" class="note">
 

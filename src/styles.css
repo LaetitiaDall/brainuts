@@ -49,3 +49,7 @@ html, body {
 .note .btn{
   width:40px;
 }
+
+.tag{
+  text-shadow:0px 1px 1px grey;
+}
