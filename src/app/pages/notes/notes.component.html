@@ -1,2 +1,53 @@
-<h2>Notes</h2>
+<h2>Les chiens des retraités</h2>
 
+<form>
+  <div class="form-group">
+    <label for="textarea">write a note:</label>
+    <textarea class="form-control" id="textarea" name="textarea" rows="3" [(ngModel)]="content"></textarea>
+  </div>
+  <button type="button" class="btn btn-primary pull-right" (click)="saveNote()"><i class="fa fa-paper-plane"
+                                                                                   aria-hidden="true"></i>
+  </button>
+
+</form>
+
+<div class="clearfix"></div>
+<hr>
+
+<div *ngFor="let note of notes" class="note">
+
+  <p class="content" [hidden]="note.editing">{{note.content}}</p>
+  <textarea *ngIf="note.editing" class="form-control" rows="3" [(ngModel)]="note.content"></textarea>
+
+  <div class="meta" *ngIf="!note.editing">
+    <span *ngIf="note.user" class="user">{{note.user.name}}</span>
+    <span class="date">{{note.creationDate | date: 'dd/MM/yyyy HH:mm'}}</span>
+  </div>
+
+  <div class="buttons">
+
+
+
+    <button *ngIf="!note.editing" type="button" class="btn btn-primary" (click)="edit(note)"><i
+      class="fa fa-pencil" aria-hidden="true"></i></button>
+
+
+    <button *ngIf="!note.editing" type="button" class="btn btn-danger" (click)="delete(note)">
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </button>
+
+
+
+    <button *ngIf="note.editing" type="submit" class="btn btn-success" (click)="update(note)"><i
+      class="fa fa-check"
+      aria-hidden="true"></i>
+    </button>
+
+    <button *ngIf="note.editing" type="button" class="btn btn-warning" (click)="cancel(note)"><i
+      class="fa fa-undo" aria-hidden="true"></i>
+    </button>
+
+    <div class="clearfix"></div>
+  </div>
+
+</div>

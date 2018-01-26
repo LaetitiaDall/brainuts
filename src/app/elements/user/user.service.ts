@@ -30,6 +30,10 @@ export class UserService {
     }
   }
 
+  isLoggedIn(): boolean {
+    return this.mainUserValue != null;
+  }
+
   setMainUser(user: User) {
     this.mainUserValue = user;
     this.mainUser.next(user);
@@ -43,6 +47,7 @@ export class UserService {
     console.log('Login with', name, password);
     return this.httpClient
       .post<User>(`${environment.api_url}/login`, {name: name, password: password}).subscribe(user => {
+        this.authService.setToken(user.token);
         this.setMainUser(user);
       });
   }
