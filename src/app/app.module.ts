@@ -13,6 +13,9 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {NoteService} from './elements/note/note.service';
 import {LoginComponent} from './pages/login/login.component';
 import {NotesComponent} from './pages/notes/notes.component';
+import {environment} from '../environments/environment';
+import {TagService} from './elements/tag/tag.service';
+import {HelperService} from './elements/util/helpers.service';
 
 
 @NgModule({
@@ -51,7 +54,7 @@ import {NotesComponent} from './pages/notes/notes.component';
       useClass: AuthInterceptor,
       multi: true,
     },
-    UserService, NoteService, AuthService],
+    UserService, NoteService, TagService, AuthService, HelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

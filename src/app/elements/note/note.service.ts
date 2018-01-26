@@ -34,6 +34,11 @@ export class NoteService {
       .get<Note[]>(`${environment.api_url}/notes`);
   }
 
+  getAllTags(): Observable<Note[]> {
+    return this.httpClient
+      .get<Note[]>(`${environment.api_url}/tags`);
+  }
+
   search(term: string): Observable<Note[]> {
     return this.httpClient
       .get<Note[]>(`${environment.api_url}/notes/search/${term}`);

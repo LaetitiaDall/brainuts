@@ -2,21 +2,28 @@
 
 <form>
   <div class="form-group">
-    <label for="textarea">write a note:</label>
     <textarea class="form-control" id="textarea" name="textarea" rows="3" [(ngModel)]="content"></textarea>
   </div>
   <button type="button" class="btn btn-primary pull-right" (click)="saveNote()"><i class="fa fa-paper-plane"
                                                                                    aria-hidden="true"></i>
   </button>
 
+  <button type="button" class="btn btn-secondary pull-right" (click)="refresh()">
+    <i class="fa fa-refresh" aria-hidden="true"></i>
+  </button>
+
 </form>
+
 
 <div class="clearfix"></div>
 <hr>
 
 <div *ngFor="let note of notes" class="note">
 
-  <p class="content" [hidden]="note.editing">{{note.content}}</p>
+  <p class="content" [hidden]="note.editing">
+    <span *ngFor="let part of contentSplited(note)"><a class="tag" href="{{part}}" *ngIf="tagsByWord[part]"><font
+      color="#{{tagsByWord[part].color}}">{{part}}</font></a><span *ngIf="!tagsByWord[part]">{{part}}</span></span>
+  </p>
   <textarea *ngIf="note.editing" class="form-control" rows="3" [(ngModel)]="note.content"></textarea>
 
   <div class="meta" *ngIf="!note.editing">
@@ -27,15 +34,13 @@
   <div class="buttons">
 
 
-
     <button *ngIf="!note.editing" type="button" class="btn btn-primary" (click)="edit(note)"><i
       class="fa fa-pencil" aria-hidden="true"></i></button>
 
 
-    <button *ngIf="!note.editing" type="button" class="btn btn-danger" (click)="delete(note)">
+    <button *ngIf="!note.editing" type="button" class="btn btn-secondary" (click)="delete(note)">
       <i class="fa fa-trash-o" aria-hidden="true"></i>
     </button>
-
 
 
     <button *ngIf="note.editing" type="submit" class="btn btn-success" (click)="update(note)"><i
@@ -43,7 +48,7 @@
       aria-hidden="true"></i>
     </button>
 
-    <button *ngIf="note.editing" type="button" class="btn btn-warning" (click)="cancel(note)"><i
+    <button *ngIf="note.editing" type="button" class="btn btn-secondary" (click)="cancel(note)"><i
       class="fa fa-undo" aria-hidden="true"></i>
     </button>
 
