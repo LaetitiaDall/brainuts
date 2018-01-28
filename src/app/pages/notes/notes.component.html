@@ -1,11 +1,11 @@
-<h3>Les chiens des retraités</h3>
+<app-menu [activeTab]="'notes'"></app-menu>
+
 
 <form>
   <div class="form-group">
-    <textarea class="form-control" id="textarea" name="textarea" rows="3" [(ngModel)]="content"></textarea>
+    <textarea class="form-control" id="textarea" name="textarea" rows="3" placeholder="Write a note and use htags..."
+              [(ngModel)]="content"></textarea>
   </div>
-
-
   <button type="button" class="btn btn-primary pull-right" (click)="saveNote()">
     <i class="fa fa-paper-plane" aria-hidden="true"></i>
   </button>
@@ -13,26 +13,25 @@
   <button type="button" class="btn btn-secondary pull-right" (click)="refresh()">
     <i class="fa fa-refresh" aria-hidden="true"></i>
   </button>
-
 </form>
 
 
 <div class="clearfix"></div>
 <hr>
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">#</span>
-  </div>
-  <input type="text" class="form-control" placeholder="tag">
+<!--
+<div class="form-group">
+  <select [(ngModel)]="selectedTag" class="form-control" id="exampleFormControlSelect1">
+    <option [ngValue]="null">- Select tag -</option>
+    <option *ngFor="let tag of tags" [ngValue]="tag">{{tag.name}}</option>
+  </select>
 </div>
-
-
+-->
 
 <div *ngFor="let note of notes" class="note">
 
   <p class="content" [hidden]="note.editing">
-    <span *ngFor="let part of contentSplited(note)"><a class="tag" href="{{part}}" *ngIf="tagsByWord[part]"><font
+    <span *ngFor="let part of contentSplited(note)"><a class="tag" [routerLink]="['/notes', tagsByWord[part].name]" *ngIf="tagsByWord[part]"><font
       color="#{{tagsByWord[part].color}}">{{part}}</font></a><span *ngIf="!tagsByWord[part]">{{part}}</span></span>
   </p>
   <textarea *ngIf="note.editing" class="form-control" rows="3" [(ngModel)]="note.content"></textarea>

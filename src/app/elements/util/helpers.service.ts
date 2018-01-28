@@ -17,6 +17,8 @@ export class HelperService {
     str = str.replace(/[àáâãäå]/g, 'a');
     str = str.replace(/[ÈÉÊË]/g, 'E');
     str = str.replace(/[èéêë]/g, 'e');
+    str = str.replace(/[ôöòó]/g, 'o');
+    str = str.replace(/[ÔÖÒÓ]/g, 'O');
     return str;
   }
 

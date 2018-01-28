@@ -16,6 +16,9 @@ import {NotesComponent} from './pages/notes/notes.component';
 import {environment} from '../environments/environment';
 import {TagService} from './elements/tag/tag.service';
 import {HelperService} from './elements/util/helpers.service';
+import {MenuComponent} from './elements/menu/menu.component';
+import {TagsComponent} from './pages/tags/tags.component';
+import { NotesListComponent } from './elements/note/notes-list/notes-list.component';
 
 
 @NgModule({
@@ -23,6 +26,9 @@ import {HelperService} from './elements/util/helpers.service';
     AppComponent,
     LoginComponent,
     NotesComponent,
+    MenuComponent,
+    TagsComponent,
+    NotesListComponent,
   ],
   imports: [
     AngularFontAwesomeModule,
@@ -35,9 +41,19 @@ import {HelperService} from './elements/util/helpers.service';
         path: '',
         component: LoginComponent
       },
+
       {
         path: 'notes',
-        component: NotesComponent
+        component: NotesComponent,
+      },
+      {
+        path: 'notes/:tag',
+        component: NotesComponent,
+      },
+
+      {
+        path: 'tags',
+        component: TagsComponent
       },
       {
         path: '**',

@@ -20,7 +20,12 @@ export class NotesComponent implements OnInit {
   tagsByWord = {};
   oldcontent: string;
 
-  constructor(private userService: UserService, private tagService: TagService, private helperService: HelperService, private noteService: NoteService, private router: Router) {
+  constructor(private userService: UserService,
+              private tagService: TagService,
+              private helperService: HelperService,
+              private noteService: NoteService,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.notes = new Array<Note>();
     this.tags = new Array<Tag>();
   }
@@ -48,7 +53,6 @@ export class NotesComponent implements OnInit {
 
       if (tagSimplified.localeCompare(wordSimplified) === 0) {
         this.tagsByWord[word] = tag;
-        console.log(word, tag);
         return;
       }
     }
@@ -80,7 +84,6 @@ export class NotesComponent implements OnInit {
     });
   }
 
-
   update(note) {
     this.noteService.update(note).subscribe(updatedNote => {
       note.editing = false;
@@ -103,7 +106,6 @@ export class NotesComponent implements OnInit {
   }
 
   refresh() {
-
     this.tagService.getAll().subscribe(tags => {
       this.tags = tags;
 
@@ -111,8 +113,6 @@ export class NotesComponent implements OnInit {
         this.notes = notes;
       });
     });
-
-
   }
 
   delete(note) {
@@ -123,8 +123,6 @@ export class NotesComponent implements OnInit {
         this.refresh();
       });
     }
-
-
   }
 
   quit() {
@@ -133,6 +131,9 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    let tagName = this.route.snapshot.paramMap.get('tag');
+    console.log(tagName);
 
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/']);

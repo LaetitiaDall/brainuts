@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   frontendUrl: 'http://localhost:4200',
-  api_url: 'http://leschiensdesvampires.com:22551',
+  api_url: 'http://localhost:22551',
   base_folder: '/'
 
 };
